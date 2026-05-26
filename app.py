@@ -1,25 +1,44 @@
 import json
+import os
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 from flask import Flask, jsonify, render_template, request
 
 BASE_DIR = Path(__file__).resolve().parent
-DATA_DIR = BASE_DIR / "data"
-DB_PATH = DATA_DIR / "registrations.db"
 
-app = Flask(__name__)
-app.secret_key = "change-me-in-production-use-env-var"
+# Support correct folders (templates/, static/, data/) OR flat GitHub upload
+if (BASE_DIR / "templates" / "index.html").exists():
+    TEMPLATE_DIR = BASE_DIR / "templates"
+    STATIC_DIR = BASE_DIR / "static"
+    SPORTS_JSON = BASE_DIR / "data" / "sports.json"
+    DB_PATH = BASE_DIR / "data" / "registrations.db"
+else:
+    TEMPLATE_DIR = BASE_DIR
+    STATIC_DIR = BASE_DIR
+    SPORTS_JSON = BASE_DIR / "sports.json"
+    DB_PATH = BASE_DIR / "registrations.db"
+
+DATA_DIR = DB_PATH.parent
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+app = Flask(
+    __name__,
+    template_folder=str(TEMPLATE_DIR),
+    static_folder=str(STATIC_DIR),
+)
+app.secret_key = os.environ.get("SECRET_KEY", "change-me-in-production-use-env-var")
 
 
 def load_sports():
-    with open(DATA_DIR / "sports.json", encoding="utf-8") as f:
+    if not SPORTS_JSON.exists():
+        raise FileNotFoundError(f"Sports data not found: {SPORTS_JSON}")
+    with open(SPORTS_JSON, encoding="utf-8") as f:
         return json.load(f)
 
 
 def get_db():
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     return conn
@@ -46,9 +65,18 @@ def init_db():
         )
 
 
-@app.before_request
-def ensure_db():
-    init_db()
+init_db()
+
+
+@app.route("/health")
+def health():
+    return jsonify(
+        {
+            "ok": True,
+            "sports_json": str(SPORTS_JSON),
+            "templates": str(TEMPLATE_DIR),
+        }
+    )
 
 
 @app.route("/")
@@ -87,7 +115,7 @@ def register():
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
-                datetime.utcnow().isoformat(timespec="seconds") + "Z",
+                datetime.now(timezone.utc).isoformat(timespec="seconds"),
                 data["full_name"].strip(),
                 data["email"].strip(),
                 data["phone"].strip(),
@@ -123,5 +151,5 @@ def admin_registrations():
 
 
 if __name__ == "__main__":
-    # Port 5050 — 5000 is often used by other local Flask apps (e.g. tic-tac-toe)
-    app.run(debug=True, host="127.0.0.1", port=5050)
+    port = int(os.environ.get("PORT", 5050))
+    app.run(debug=True, host="127.0.0.1", port=port)
