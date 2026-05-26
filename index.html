@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Indoor sports · All skill levels</p>
+      <h1>Train indoors.<br>Play your best.</h1>
+      <p class="lead">
+        Register for badminton, table tennis, basketball, and more.
+        View batch timings, training days, and transparent fee plans in one place.
+      </p>
+      <div class="hero-actions">
+        <a href="#register" class="btn btn-primary">Register now</a>
+        <a href="#sports" class="btn btn-ghost">Browse sports</a>
+      </div>
+      <ul class="hero-stats">
+        <li><strong>8</strong> indoor sports</li>
+        <li><strong>20+</strong> weekly batches</li>
+        <li><strong>500+</strong> active members</li>
+      </ul>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="court-card">
+        <span class="court-icon">🏸</span>
+        <span class="court-icon">🏀</span>
+        <span class="court-icon">🏓</span>
+        <span class="court-icon">⚽</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sports" class="section">
+  <div class="container">
+    <header class="section-head">
+      <h2>Indoor sports &amp; schedules</h2>
+      <p>Each program lists training days, batch timings, and fee options. Click <strong>Register</strong> on any sport to pre-fill your form.</p>
+    </header>
+
+    <div class="sports-grid">
+      {% for sport in sports %}
+      <article class="sport-card" data-sport-id="{{ sport.id }}">
+        <div class="sport-card-head">
+          <span class="sport-icon">{{ sport.icon }}</span>
+          <div>
+            <h3>{{ sport.name }}</h3>
+            <p class="sport-desc">{{ sport.description }}</p>
+          </div>
+        </div>
+
+        <div class="sport-meta">
+          <div class="meta-block">
+            <h4>Training days</h4>
+            <ul class="day-pills">
+              {% for day in sport.days %}
+              <li>{{ day }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="meta-block">
+            <h4>Timings</h4>
+            <ul class="timing-list">
+              {% for t in sport.timings %}
+              <li>
+                <span class="timing-slot">{{ t.slot }}</span>
+                <span class="timing-time">{{ t.time }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <div class="fee-preview" id="fees">
+          <h4>Fee structure <span class="currency">(₹ INR)</span></h4>
+          <table class="fee-table">
+            <thead>
+              <tr>
+                <th>Plan</th>
+                <th>Amount</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for fee in sport.fees %}
+              <tr>
+                <td>{{ fee.plan }}</td>
+                <td class="amount">₹{{ "{:,}".format(fee.amount) }}</td>
+                <td>{{ fee.note }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-primary btn-register-sport"
+          data-sport-id="{{ sport.id }}"
+          data-sport-name="{{ sport.name }}"
+        >
+          Register for {{ sport.name }}
+        </button>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="register" class="section section-alt">
+  <div class="container register-layout">
+    <header class="section-head">
+      <h2>Registration form</h2>
+      <p>Fill in your details and choose sport, preferred batch timing, and fee plan.</p>
+    </header>
+
+    <form id="registration-form" class="register-form" novalidate>
+      <div class="form-row">
+        <label for="full_name">Full name <span class="req">*</span></label>
+        <input type="text" id="full_name" name="full_name" required autocomplete="name" placeholder="Your full name">
+      </div>
+
+      <div class="form-row two-col">
+        <div>
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div>
+          <label for="phone">Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+91 98765 43210">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="age">Age (optional)</label>
+        <input type="number" id="age" name="age" min="5" max="99" placeholder="e.g. 14">
+      </div>
+
+      <div class="form-row">
+        <label for="sport_id">Sport <span class="req">*</span></label>
+        <select id="sport_id" name="sport_id" required>
+          <option value="">Select a sport</option>
+          {% for sport in sports %}
+          <option value="{{ sport.id }}">{{ sport.icon }} {{ sport.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="timing_slot">Preferred batch / timing <span class="req">*</span></label>
+        <select id="timing_slot" name="timing_slot" required disabled>
+          <option value="">Select sport first</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="fee_plan">Fee plan <span class="req">*</span></label>
+        <select id="fee_plan" name="fee_plan" required disabled>
+          <option value="">Select sport first</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="notes">Notes (optional)</label>
+        <textarea id="notes" name="notes" rows="3" placeholder="Medical conditions, experience level, preferred coach…"></textarea>
+      </div>
+
+      <div id="selected-summary" class="selected-summary" hidden></div>
+
+      <button type="submit" class="btn btn-primary btn-block">Submit registration</button>
+    </form>
+
+    <aside class="register-aside">
+      <h3>How it works</h3>
+      <ol>
+        <li>Choose your indoor sport and batch timing.</li>
+        <li>Pick a monthly, quarterly, or other fee plan.</li>
+        <li>Submit the form — our team confirms within 24 hours.</li>
+        <li>Pay at the front desk or via UPI on your first visit.</li>
+      </ol>
+      <div class="aside-card">
+        <p><strong>Free trial</strong></p>
+        <p>First session free for new members on weekday morning batches (subject to slot availability).</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<script id="sports-data" type="application/json">{{ sports | tojson }}</script>
+{% endblock %}

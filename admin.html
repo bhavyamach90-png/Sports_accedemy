@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Registrations · Apex Indoor Sports Academy{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <header class="section-head">
+      <h2>Recent registrations</h2>
+      <p>Internal view — last 200 submissions. <a href="{{ url_for('index') }}">← Back to site</a></p>
+    </header>
+
+    {% if registrations %}
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Sport</th>
+            <th>Timing</th>
+            <th>Fee plan</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in registrations %}
+          <tr>
+            <td>{{ r.id }}</td>
+            <td>{{ r.created_at[:10] }}</td>
+            <td>{{ r.full_name }}{% if r.age %} ({{ r.age }}){% endif %}</td>
+            <td>{{ r.email }}<br>{{ r.phone }}</td>
+            <td>{{ r.sport_name }}</td>
+            <td>{{ r.timing_slot }}</td>
+            <td>{{ r.fee_plan }}</td>
+            <td>{{ r.notes or '—' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="empty-state">No registrations yet.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

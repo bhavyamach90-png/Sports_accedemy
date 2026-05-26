@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Thusti Indoor Sports Academy{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="{{ url_for('index') }}" class="logo">
+        <span class="logo-mark">A</span>
+        <span class="logo-text">Thusti Indoor<br><small>Sports Academy</small></span>
+      </a>
+      <nav class="nav">
+        <a href="{{ url_for('index') }}#sports">Sports</a>
+        <a href="{{ url_for('index') }}#fees">Fees</a>
+        <a href="{{ url_for('index') }}#register" class="btn btn-sm">Register</a>
+        <a href="{{ url_for('admin_registrations') }}" class="nav-admin">Admin</a>
+      </nav>
+      <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p><strong>Thusti Indoor Sports Academy</strong></p>
+      <p>Mon–Sat 6:00 AM – 9:00 PM · Indoor complex, climate-controlled courts</p>
+      <p class="footer-contact">📞 +91 98765 43210 · ✉️ hello@apexindoor.in</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  {% block scripts %}{% endblock %}
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html>

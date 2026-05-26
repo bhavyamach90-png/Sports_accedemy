@@ -1,0 +1,138 @@
+[
+  {
+    "id": "badminton",
+    "name": "Badminton",
+    "icon": "🏸",
+    "description": "Professional courts with coaching for beginners to advanced players.",
+    "days": ["Mon", "Wed", "Fri", "Sat"],
+    "timings": [
+      {"slot": "Morning Batch", "time": "6:00 AM – 8:00 AM"},
+      {"slot": "Evening Batch", "time": "5:00 PM – 7:00 PM"},
+      {"slot": "Weekend Intensive", "time": "8:00 AM – 11:00 AM (Sat only)"}
+    ],
+    "fees": [
+      {"plan": "Monthly", "amount": 2500, "note": "3 sessions/week"},
+      {"plan": "Quarterly", "amount": 6500, "note": "Save ₹1,000"},
+      {"plan": "Annual", "amount": 22000, "note": "Best value + free kit"}
+    ]
+  },
+  {
+    "id": "table-tennis",
+    "name": "Table Tennis",
+    "icon": "🏓",
+    "description": "ITTF-standard tables with spin and footwork drills.",
+    "days": ["Tue", "Thu", "Sat", "Sun"],
+    "timings": [
+      {"slot": "Junior Batch", "time": "4:00 PM – 5:30 PM"},
+      {"slot": "Open Play", "time": "6:00 PM – 8:00 PM"},
+      {"slot": "Morning Practice", "time": "7:00 AM – 9:00 AM (Sun)"}
+    ],
+    "fees": [
+      {"plan": "Monthly", "amount": 2000, "note": "Unlimited table time in batch"},
+      {"plan": "Quarterly", "amount": 5200, "note": "Includes 2 private lessons"},
+      {"plan": "Drop-in (per session)", "amount": 300, "note": "Subject to availability"}
+    ]
+  },
+  {
+    "id": "basketball",
+    "name": "Indoor Basketball",
+    "icon": "🏀",
+    "description": "Full-size indoor court with league play and skill camps.",
+    "days": ["Mon", "Tue", "Thu", "Sat"],
+    "timings": [
+      {"slot": "Youth (U-16)", "time": "4:30 PM – 6:00 PM"},
+      {"slot": "Adults League", "time": "7:00 PM – 9:00 PM"},
+      {"slot": "Weekend Skills", "time": "9:00 AM – 11:00 AM"}
+    ],
+    "fees": [
+      {"plan": "Monthly", "amount": 3500, "note": "League + practice"},
+      {"plan": "Quarterly", "amount": 9000, "note": "Jersey included"},
+      {"plan": "Annual", "amount": 30000, "note": "Priority league slots"}
+    ]
+  },
+  {
+    "id": "volleyball",
+    "name": "Indoor Volleyball",
+    "icon": "🏐",
+    "description": "Six-a-side training with certified coaches and tournament prep.",
+    "days": ["Wed", "Fri", "Sun"],
+    "timings": [
+      {"slot": "Beginners", "time": "5:00 PM – 6:30 PM"},
+      {"slot": "Competitive", "time": "7:00 PM – 9:00 PM"},
+      {"slot": "Sunday Clinic", "time": "10:00 AM – 12:00 PM"}
+    ],
+    "fees": [
+      {"plan": "Monthly", "amount": 2800, "note": "2 sessions/week"},
+      {"plan": "Quarterly", "amount": 7200, "note": "Tournament entry fee waived"},
+      {"plan": "Team (5 players)", "amount": 12000, "note": "Per quarter, shared"}
+    ]
+  },
+  {
+    "id": "squash",
+    "name": "Squash",
+    "icon": "🎾",
+    "description": "Air-conditioned glass-back courts with solo and doubles coaching.",
+    "days": ["Mon", "Wed", "Thu", "Sat"],
+    "timings": [
+      {"slot": "Peak Hours", "time": "6:00 AM – 9:00 AM & 6:00 PM – 9:00 PM"},
+      {"slot": "Off-peak", "time": "10:00 AM – 4:00 PM"},
+      {"slot": "Coaching Block", "time": "7:00 PM – 8:00 PM (Wed)"}
+    ],
+    "fees": [
+      {"plan": "Monthly (8 hrs)", "amount": 4500, "note": "Court booking included"},
+      {"plan": "Quarterly (30 hrs)", "amount": 15000, "note": "2 coaching sessions"},
+      {"plan": "Hourly court", "amount": 600, "note": "Members only off-peak"}
+    ]
+  },
+  {
+    "id": "futsal",
+    "name": "Indoor Futsal",
+    "icon": "⚽",
+    "description": "5-a-side turf arena with refereed matches and fitness conditioning.",
+    "days": ["Tue", "Thu", "Fri", "Sun"],
+    "timings": [
+      {"slot": "Kids U-12", "time": "4:00 PM – 5:30 PM"},
+      {"slot": "Open Turf", "time": "6:00 PM – 8:00 PM"},
+      {"slot": "Sunday League", "time": "8:00 AM – 12:00 PM"}
+    ],
+    "fees": [
+      {"plan": "Monthly", "amount": 3200, "note": "League + training"},
+      {"plan": "Quarterly", "amount": 8500, "note": "Shin guards provided"},
+      {"plan": "Hourly turf rent", "amount": 1200, "note": "Up to 10 players"}
+    ]
+  },
+  {
+    "id": "boxing",
+    "name": "Boxing & Fitness",
+    "icon": "🥊",
+    "description": "Ring training, bag work, and conditioning in a supervised indoor gym.",
+    "days": ["Mon", "Tue", "Wed", "Fri", "Sat"],
+    "timings": [
+      {"slot": "Fundamentals", "time": "6:30 AM – 7:30 AM"},
+      {"slot": "Sparring (intermediate+)", "time": "7:00 PM – 8:30 PM"},
+      {"slot": "Women-only", "time": "11:00 AM – 12:00 PM (Sat)"}
+    ],
+    "fees": [
+      {"plan": "Monthly", "amount": 4000, "note": "Unlimited group classes"},
+      {"plan": "Quarterly", "amount": 10500, "note": "Gloves on rent free"},
+      {"plan": "Personal (10 sessions)", "amount": 8000, "note": "1-on-1 coach"}
+    ]
+  },
+  {
+    "id": "chess",
+    "name": "Chess Academy",
+    "icon": "♟️",
+    "description": "Rated tournaments, puzzles, and FIDE-pattern coaching indoors.",
+    "days": ["Tue", "Thu", "Sat"],
+    "timings": [
+      {"slot": "Juniors", "time": "4:00 PM – 5:30 PM"},
+      {"slot": "Advanced", "time": "6:00 PM – 8:00 PM"},
+      {"slot": "Rapid Tournament", "time": "10:00 AM – 1:00 PM (Sat)"}
+    ],
+    "fees": [
+      {"plan": "Monthly", "amount": 1500, "note": "2 classes + online puzzles"},
+      {"plan": "Quarterly", "amount": 4000, "note": "Tournament entry included"},
+      {"plan": "Annual", "amount": 14000, "note": "National rating support"}
+    ]
+  }
+]
